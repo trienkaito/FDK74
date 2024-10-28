@@ -2,6 +2,7 @@
 @model FBK74App.Areas.Admin.Pages.Auth.LoginModel
 @{
     Layout = null;
+    ViewData["Title"] = "Đăng nhập";
 }
 
 <!doctype html>
@@ -29,16 +30,26 @@
                                     <img src="~/assets/images/logos/dark-logo.svg" width="180" alt="">
                                 </a>
                                 <p class="text-center">Admin</p>
-                                <form>
+                                <form method="post">
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Username</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                       @*   <label for="exampleInputEmail1" class="form-label">Username</label>
+                                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> *@
+                                        <label asp-for="@Model.UserName" class="form-label">Tên Đăng Nhập</label>
+                                        <input asp-for="@Model.UserName" class="form-control" />
+                                        <span class="form-text text-danger" asp-validation-for="@Model.UserName"></span>
                                     </div>
                                     <div class="mb-4">
-                                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1">
+                                        @* <label for="exampleInputPassword1" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword1"> *@
+                                        <label asp-for="@Model.Password" class="form-label">Mật Khẩu</label>
+                                        <input asp-for="@Model.Password" class="form-control" />
+                                        <span class="form-text text-danger" asp-validation-for="@Model.Password"></span>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-4">
+                                        @if (TempData["Message"] != null)
+                                        {
+                                            <span class="text-danger">@TempData["Message"]</span>
+                                        }
                                          @*  <div class="form-check">
                                                <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>
                                               <label class="form-check-label text-dark" for="flexCheckChecked">
@@ -47,7 +58,7 @@
                                          </div> *@
                                        @*   <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a> *@
                                     </div>
-                                    <a asp-area="Admin" asp-page="/Auth/Login" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</a>
+                                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Đăng nhập</button>
                                     <div class="d-flex align-items-center justify-content-center">
                                         @* <p class="fs-4 mb-0 fw-bold">New to Modernize?</p> *@
 @*                                          <a class="text-primary fw-bold ms-2" asp-area="Admin" asp-page="/Auth/Register">Create an account</a>

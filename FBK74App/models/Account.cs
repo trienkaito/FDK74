@@ -4,6 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FBK74App.models
 {
+    public enum AccountType
+    {
+        Member = 0,
+        Admin = 1
+    }
     public class Account : Tracking
     {
         [Key]
@@ -14,7 +19,7 @@ namespace FBK74App.models
         public required string Password { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
-        public required string Role { get; set; }
+        public AccountType Type { get; set; }
         public string? Status { get; set; }
 
         // Implementing Tracking properties
