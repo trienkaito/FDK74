@@ -1,4 +1,5 @@
 using FBK74App.models;
+using FBK74App.Repository;
 using FBK74App.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Proxies;
@@ -46,6 +47,7 @@ builder.Services.AddAuthentication("AdminScheme")
 
 builder.Services.AddScoped<ICookieAuthentication, CookieAuthentication>();
 builder.Services.AddScoped<ICookieAdminAuthentication, CookieAdminAuthentication>();
+builder.Services.AddScoped<IRegisteredFootballFieldRepository, RegisteredFootballFieldRepository>();
 
 var app = builder.Build();
 
