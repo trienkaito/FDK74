@@ -4,6 +4,10 @@ namespace FBK74App.models
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext()
+        {
+        }
+
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options){}
 
@@ -16,6 +20,15 @@ namespace FBK74App.models
         public DbSet<FootballField> FootballFields { get; set; }
         public DbSet<FootballFieldSchedule> FootballFieldSchedules { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var builder = new ConfigurationBuilder()
+                                  .SetBasePath(Directory.GetCurrentDirectory())
+                                  .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            IConfigurationRoot configuration = builder.Build();
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<RegistFindOppoent>()
@@ -131,11 +144,15 @@ namespace FBK74App.models
             );
 
             modelBuilder.Entity<FootballFieldSchedule>().HasData(
-                new FootballFieldSchedule { Id = 1, FootballFieldId = 1, StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(2), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-                new FootballFieldSchedule { Id = 2, FootballFieldId = 2, StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(2), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-                new FootballFieldSchedule { Id = 3, FootballFieldId = 3, StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(2), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-                new FootballFieldSchedule { Id = 4, FootballFieldId = 4, StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(2), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-                new FootballFieldSchedule { Id = 5, FootballFieldId = 5, StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(2), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now }
+                new FootballFieldSchedule { Id = 1, FootballFieldId = 1, StartTime = new TimeOnly(6,30), EndTime = new TimeOnly(7, 30), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new FootballFieldSchedule { Id = 6, FootballFieldId = 1, StartTime = new TimeOnly(7, 30), EndTime = new TimeOnly(8, 30), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new FootballFieldSchedule { Id = 7, FootballFieldId = 1, StartTime = new TimeOnly(8, 30), EndTime = new TimeOnly(9, 30), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new FootballFieldSchedule { Id = 8, FootballFieldId = 1, StartTime = new TimeOnly(9, 30), EndTime = new TimeOnly(10, 30), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new FootballFieldSchedule { Id = 2, FootballFieldId = 2, StartTime = new TimeOnly(7, 30), EndTime = new TimeOnly(8, 30), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new FootballFieldSchedule { Id = 9, FootballFieldId = 2, StartTime = new TimeOnly(6, 30), EndTime = new TimeOnly(7, 30), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new FootballFieldSchedule { Id = 3, FootballFieldId = 3, StartTime = new TimeOnly(8, 30), EndTime = new TimeOnly(9, 30), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new FootballFieldSchedule { Id = 4, FootballFieldId = 4, StartTime = new TimeOnly(9, 30), EndTime = new TimeOnly(10, 30), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new FootballFieldSchedule { Id = 5, FootballFieldId = 5, StartTime = new TimeOnly(10, 30), EndTime = new TimeOnly(11, 30), Status = "Scheduled", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now }
             );
 
 

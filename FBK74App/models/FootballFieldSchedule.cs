@@ -11,8 +11,8 @@ namespace FBK74App.models
         public int Id { get; set; }
         public int FootballFieldId { get; set; }
         public virtual FootballField? FootballField { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public TimeOnly? StartTime { get; set; }
+        public TimeOnly? EndTime { get; set; }
         public string? Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
