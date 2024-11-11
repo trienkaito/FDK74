@@ -32,7 +32,7 @@ namespace FBK74App.Areas.Admin.Pages.Auth
         {
             if (ModelState.IsValid)
             {
-                var account = _context.Accounts.SingleOrDefault(acc => acc.UserName == UserName && acc.Password == /*HashPassword.GetHashPassword(Password)*/ Password && acc.Type.Equals(1));
+                var account = _context.Accounts.SingleOrDefault(acc => acc.UserName == UserName && acc.Password == /*HashPassword.GetHashPassword(Password)*/ Password && ((int)acc.Type) == 1);
                 if (account == default)
                 {
                     TempData["Message"] = "Username or Password is wrong";
