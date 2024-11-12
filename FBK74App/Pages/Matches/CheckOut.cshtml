@@ -5,10 +5,20 @@
     ViewData["Title"] = "CheckOut";
 }
 
-<h1>CheckOut</h1>
+<div class="hero overlay" style="background-image: url('@Url.Content("~/images/bg_3.jpg")');">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 mx-auto text-center">
+                <h1 class="text-white">CheckOut</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, molestias repudiandae pariatur.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h4>RegisteredFootballField</h4>
-<hr />
+<div class="site-section">
+    <div class="container">
+       
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -20,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="RegisteredFootballField.Deposit" class="control-label"></label>
-                <input type="text" class="form-control" value="200.000 dong" readonly />
+                <p>200.000 dong</p>
                 <span asp-validation-for="RegisteredFootballField.Deposit" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -53,6 +63,9 @@
 
 <div>
     <a asp-page="Index">Back to List</a>
+</div>
+        
+</div>
 </div>
 
 @section Scripts {

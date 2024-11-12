@@ -26,10 +26,17 @@ namespace FBK74App.Pages.Matches
         }
         [BindProperty]
         public int ffId { get; set; }
+        [BindProperty]
+
         public DateTime CurrentDate { get; set; }
 
-        public int AccountId { get; private set; }
+        [BindProperty]
 
+        public int AccountId { get; private set; }
+        [BindProperty]
+        public string Name { get; set; }
+        [BindProperty]
+        public string Note { get; set; }
 
         public IActionResult OnGet(int id, DateTime currentDate)
         {
@@ -61,6 +68,8 @@ namespace FBK74App.Pages.Matches
                 Name = RegisteredFootballField.Name,
                 Deposit = 200,
                 Account1Id = AccountId,
+                Account2Id = 2,
+                RegistFindOppoentId = 1,
                 Date = CurrentDate,
                 Note = RegisteredFootballField.Note
             };
