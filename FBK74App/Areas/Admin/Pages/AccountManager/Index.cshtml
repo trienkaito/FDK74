@@ -2,15 +2,20 @@
 @model FBK74App.Areas.Admin.Pages.AccountManager.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quản lý người dùng";
 }
+<div class="container pt-5 ">
+    <div class="px-4 py-4 card">
+        <h1>Quản lý người dùng</h1>
 
-<h1>Index</h1>
+ @* <p>
+     <a asp-page="Create">Create New</a>
+ </p> *@
+    <div class="d-flex flex-row-reverse">
+        <a type="button" class="btn btn-primary " asp-page="Create">Tạo mới</a>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
+ </div>
+        <table id="myTable" class="table display">
     <thead>
         <tr>
             <th>
@@ -43,8 +48,9 @@
     <tbody>
 @foreach (var item in Model.Account) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
+                <td>
+                 @* @Html.DisplayFor(modelItem => item.UserName) *@
+                    <a asp-page="./Edit" asp-route-id="@item.Id">@item.UserName</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Password)
@@ -68,11 +74,22 @@
                 @Html.DisplayFor(modelItem => item.UpdatedDate)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                 @* <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> | *@
+                            <a asp-page="./Delete" asp-route-id="@item.Id" style="color:red">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>
+</div>
+@section Scripts {
+    @{
+        <script>
+            $(document).ready(function () {
+                $('#myTable').DataTable();
+            });
+        </script>
+    }
+}

@@ -33,6 +33,8 @@ namespace FBK74App.Areas.Admin.Pages.FootballFieldManager
             {
                 return Page();
             }
+            FootballField.CreatedDate = DateTime.Now;   
+            FootballField.UpdatedDate = DateTime.Now;
 
             _context.FootballFields.Add(FootballField);
             await _context.SaveChangesAsync();

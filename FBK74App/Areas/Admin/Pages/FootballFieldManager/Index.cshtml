@@ -2,15 +2,17 @@
 @model FBK74App.Areas.Admin.Pages.FootballFieldManager.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quản lý sân bóng";
 }
+<div class="container pt-5 mt-3 ">
+    <div class="px-4 py-4 mt-4 card">
+        <h1>Quản lý sân bóng</h1>
 
-<h1>Index</h1>
+        <div class="d-flex flex-row-reverse">
+            <a type="button" class="btn btn-primary " asp-page="Create">Tạo mới</a>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
+        </div>
+<table id="table2" class="table">
     <thead>
         <tr>
             <th>
@@ -19,60 +21,73 @@
             <th>
                 @Html.DisplayNameFor(model => model.FootballField[0].Price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FootballField[0].Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FootballField[0].Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FootballField[0].Description)
-            </th>
+           @*   <th>
+                 @Html.DisplayNameFor(model => model.FootballField[0].Image)
+             </th>
+             <th>
+                 @Html.DisplayNameFor(model => model.FootballField[0].Address)
+             </th>
+             <th>
+                 @Html.DisplayNameFor(model => model.FootballField[0].Description)
+             </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.FootballField[0].Status)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FootballField[0].CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FootballField[0].UpdatedDate)
-            </th>
-            <th></th>
+        @*       <th>
+                  @Html.DisplayNameFor(model => model.FootballField[0].CreatedDate)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.FootballField[0].UpdatedDate)
+              </th> *@
+            <th>Hành Động</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.FootballField) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
+               @*  @Html.DisplayFor(modelItem => item.Name) *@
+                            <a asp-page="./Edit" asp-route-id="@item.Id">@item.Name</a>
+                        </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
+           @*   <td>
+                 @Html.DisplayFor(modelItem => item.Image)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Address)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Description)
+             </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
+          @*    <td>
+                 @Html.DisplayFor(modelItem => item.CreatedDate)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.UpdatedDate)
+             </td> *@
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedDate)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+               @*  <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> | *@
+                <a asp-page="./Delete" asp-route-id="@item.Id"style="color:red">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>
+</div>
+@section Scripts {
+    @{
+    <script>
+        $(document).ready(function () {
+            $('#table2').DataTable();
+        });
+        </script>
+    
+}
+}

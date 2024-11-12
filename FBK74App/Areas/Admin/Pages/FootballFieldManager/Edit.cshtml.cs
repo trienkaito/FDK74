@@ -35,6 +35,7 @@ namespace FBK74App.Areas.Admin.Pages.FootballFieldManager
                 return NotFound();
             }
             FootballField = footballfield;
+            FootballField.UpdatedDate = DateTime.Now;   
             return Page();
         }
 

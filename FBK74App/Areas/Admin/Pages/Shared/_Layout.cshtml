@@ -10,6 +10,12 @@
     @* <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" /> *@
     <link rel="shortcut icon" type="image/png" href="~/assets/images/logos/favicon.png" />
 
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+
+
     @*     <link rel="stylesheet" href="../assets/css/styles.min.css" />
     *@
     <link rel="stylesheet" href="~/assets/css/styles.min.css" />
@@ -48,7 +54,7 @@
                             <span class="hide-menu">Quản lý sân bóng</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" asp-area="Admin" asp-page="/FieldManager" aria-expanded="false">
+                            <a class="sidebar-link" asp-area="Admin" asp-page="/FootballFieldManager/Index" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-layout-dashboard"></i>
                                 </span>
@@ -84,7 +90,7 @@
                             <span class="hide-menu">Quản lý người dùng</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" asp-area="Admin" asp-page="/UserManager" aria-expanded="false">
+                            <a class="sidebar-link" asp-area="Admin" asp-page="/AccountManager/Index" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-article"></i>
                                 </span>
@@ -141,6 +147,7 @@
         </div>
     </div>
     <script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
     <script src="~/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/js/sidebarmenu.js"></script>
     <script src="~/assets/js/app.min.js"></script>
