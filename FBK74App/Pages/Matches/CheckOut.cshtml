@@ -18,56 +18,58 @@
 
 <div class="site-section">
     <div class="container">
-       
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="RegisteredFootballField.Name" class="control-label"></label>
-                <input asp-for="RegisteredFootballField.Name" class="form-control" />
-                <span asp-validation-for="RegisteredFootballField.Name" class="text-danger"></span>
+        <div class="row">
+            <div class="col-md-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="RegisteredFootballField.Name" class="control-label"></label>
+                        <input asp-for="RegisteredFootballField.Name" class="form-control" />
+                        <span asp-validation-for="RegisteredFootballField.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RegisteredFootballField.Deposit" class="control-label"></label>
+                        <p>200.000 dong</p>
+                        <span asp-validation-for="RegisteredFootballField.Deposit" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RegisteredFootballField.Account1Id" class="control-label"></label>
+                        <p>@Model.AccountId</p>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RegisteredFootballField.FootballFieldScheduleId" class="control-label"></label>
+                        <p>@Model.ffId</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Ngày hiện tại:</label>
+                        <p>@Model.CurrentDate.ToString("dd-MM-yyyy")</p>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RegisteredFootballField.Note" class="control-label"></label>
+                        <input asp-for="RegisteredFootballField.Note" class="form-control" />
+                        <span asp-validation-for="RegisteredFootballField.Note" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="RegisteredFootballField.Deposit" class="control-label"></label>
-                <p>200.000 dong</p>
-                <span asp-validation-for="RegisteredFootballField.Deposit" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RegisteredFootballField.Account1Id" class="control-label"></label>
-                <p>@Model.AccountId</p>
-            </div>
-
-            
-            <div class="form-group">
-                <label asp-for="RegisteredFootballField.FootballFieldScheduleId" class="control-label"></label>
-                <p>@Model.ffId</p>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Ngày hiện tại:</label>
-                <p>@Model.CurrentDate.ToString("dd-MM-yyyy")</p>
-            </div>
-            <div class="form-group">
-                <label asp-for="RegisteredFootballField.Note" class="control-label"></label>
-                <input asp-for="RegisteredFootballField.Note" class="form-control" />
-                <span asp-validation-for="RegisteredFootballField.Note" class="text-danger"></span>
-            </div>
-
-            
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+        <div>
+            <a asp-page="Index">Back to List</a>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-        
-</div>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+         <script>
+        $(document).ready(function() {
+            var message = '@TempData["Message"]';
+            if (message) {
+                showCustomPopup(message);
+            }
+        });
+    </script>
+    }
 }

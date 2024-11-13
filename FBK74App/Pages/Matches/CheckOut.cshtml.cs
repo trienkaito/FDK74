@@ -9,6 +9,7 @@ using FBK74App.models;
 using FBK74App.Repository;
 using FBK74App.Service;
 using Microsoft.Identity.Client;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
 
 namespace FBK74App.Pages.Matches
 {
@@ -37,30 +38,53 @@ namespace FBK74App.Pages.Matches
         public string Name { get; set; }
         [BindProperty]
         public string Note { get; set; }
-
         public IActionResult OnGet(int id, DateTime currentDate)
         {
             ViewData["Account1Id"] = new SelectList(_context.Accounts, "Id", "Id");
             ViewData["Account2Id"] = new SelectList(_context.Accounts, "Id", "Id");
             ViewData["FootballFieldScheduleId"] = new SelectList(_context.FootballFieldSchedules, "Id", "Id");
-
+        
             ffId = id;
             CurrentDate = currentDate;
-
-            var accountIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
-            if (accountIdClaim != null)
+            if (User.Identity.IsAuthenticated)
             {
-                AccountId = int.Parse(accountIdClaim.Value);
+                var accountIdClaim = User.Claims.FirstOrDefault(c => c.Type == "Id");
+                if (accountIdClaim != null)
+                {
+                    AccountId = int.Parse(accountIdClaim.Value);
+                    HttpContext.AddToSession("AccountId", AccountId);
+                    HttpContext.AddToSession("ffId", ffId);
+                }
+                else
+                {
+                    // Log or handle the case where the claim is not found
+                    ModelState.AddModelError(string.Empty, "Account ID claim not found.");
+                }
             }
+            else
+            {
+                // Log or handle the case where the user is not authenticated
+                ModelState.AddModelError(string.Empty, "User is not authenticated.");
+            }
+        
             return Page();
         }
-
         [BindProperty]
         public RegisteredFootballField RegisteredFootballField { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+        // For more information, see https://aka.ms/RazorPagesCRUD.        
         public async Task<IActionResult> OnPostAsync()
         {
+            // Ensure AccountId is valid
+                AccountId = HttpContext.GetSessionValue<int>("AccountId");
+                ffId = HttpContext.GetSessionValue<int>("ffId");
+            var account = await _context.Accounts.FindAsync(AccountId);
+            if (account == null)
+            {
+                // Handle the case where the account does not exist
+                ModelState.AddModelError(string.Empty, "Invalid Account ID.");
+                return Page();
+            }
 
             var newRFF = new RegisteredFootballField
             {
@@ -74,8 +98,11 @@ namespace FBK74App.Pages.Matches
                 Note = RegisteredFootballField.Note
             };
             await _rff.Add(newRFF);
+            HttpContext.DeleteSession("AccountId");
+            HttpContext.DeleteSession("ffId");
+            //call popup to show the message
+            TempData["Message"] = "Register successfully!";
             return RedirectToPage("Matches");
-
         }
     }
 }
